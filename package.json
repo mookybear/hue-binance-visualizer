@@ -1,0 +1,22 @@
+{
+  "name": "hue-binance-visualizer",
+  "version": "1.0.0",
+  "description": "show binance prices using smart bulbs",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mookybear/hue-binance-visualizer.git"
+  },
+  "author": "mookybear@yahoo.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mookybear/hue-binance-visualizer/issues"
+  },
+  "homepage": "https://github.com/mookybear/hue-binance-visualizer#readme",
+  "dependencies": {
+    "@q42philips/hue-color-converter": "^1.0.0",
+    "node-binance-api": "^0.8.2",
+    "node-hue-api": "^2.4.3",
+    "percent-change": "^1.0.1"
+  }
+}
