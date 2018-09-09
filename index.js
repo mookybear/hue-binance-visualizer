@@ -45,11 +45,10 @@ module.exports.visualizePriceData = async function(binanceOptions, hueOptions) {
             close = parseFloat(close);
             let pct = change(lastClose, close);
             console.log(interval + ' candle closed at ' + close + ' for ' + tradingPair + ' for a ' + (close - lastClose) + ' change');
-            let sat = 100 * pct;
-            let normalizedSat = normalize(sat);
-            normalizedSat = Math.abs(Number((normalizedSat * 255).toFixed(2)));
-            let supporting = 50 - normalizedSat;
-            let primary = 100 + normalizedSat;
+            let amount = normalize(100 * pct);
+            amount = Math.abs(Number((amount * 255).toFixed(2)));
+            let supporting = 50 - amount;
+            let primary = 100 + amount;
             if (pct > 0) {
                 thisColor = [supporting, primary, 0];
             } else if (pct < 0) {
@@ -59,7 +58,7 @@ module.exports.visualizePriceData = async function(binanceOptions, hueOptions) {
             }
             api.setLightState(light, {
                 xy: converter.calculateXY(thisColor[0], thisColor[1], thisColor[2]),
-                brightness: brightness + normalizedSat
+                brightness: brightness + amount
             });
             lastClose = close;
             lastColor = thisColor;
