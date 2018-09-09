@@ -2,10 +2,6 @@ const hue = require("node-hue-api");
 const change = require('percent-change');
 const converter = require('@q42philips/hue-color-converter');
 
-function normalize(val) {
-    return (val - 0) / (1 - 0);
-}
-
 module.exports.getHueHost = async function() {
     const bridges = await hue.nupnpSearch();
     return bridges[0].ipaddress;
@@ -43,10 +39,9 @@ module.exports.visualizePriceData = async function(binanceOptions, hueOptions) {
         if (isFinal) {
             if (!lastClose) lastClose = parseFloat(data.k.o); // open
             close = parseFloat(close);
-            let pct = change(lastClose, close);
             console.log(interval + ' candle closed at ' + close + ' for ' + tradingPair + ' for a ' + (close - lastClose) + ' change');
-            let amount = normalize(100 * pct);
-            amount = Math.abs(Number((amount * 255).toFixed(2)));
+            let pct = change(lastClose, close);
+            let amount = Math.abs(Number((pct * 255).toFixed(2)));
             let supporting = 50 - amount;
             let primary = 100 + amount;
             if (pct > 0) {
